@@ -1,0 +1,9 @@
+import express from 'express';
+import { Router } from 'express';
+
+const router = Router();
+router.get('/', (req, res) => {
+  res.send('welcome to my users router world darling');
+});
+
+export default router;
