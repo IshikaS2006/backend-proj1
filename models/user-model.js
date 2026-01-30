@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  phoneNumber: { type: Number, required: true },
+  phoneNumber: { type: Number, default: null },
   cart: { type: Array, default: [] },
   profilePic: { type: String, default: "" },
   orders: { type: Array, default: [] },

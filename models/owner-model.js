@@ -7,8 +7,8 @@ const ownerSchema = new mongoose.Schema({
   password: { type: String, required: true },
   products: { type: Array, default: [] },
   profilePic: { type: String, default: "" },
-  gstNumber: { type: String, required: true },
+  gstNumber: { type: String, default: "" },
 });
 
-
-export const User = mongoose.model("owner", ownerSchema);
+const Owner = mongoose.model("owner", ownerSchema);
+export default Owner;
