@@ -8,10 +8,11 @@ const router = express.Router();
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, phoneNumber } = req.body;
     let UserExists = await User.findOne({ email });
     if (UserExists) {
-      return  res.status(400).json({ message: "User already exists" });
+      req.flash("error", "User already exists");
+      return res.redirect("/");
     }
     // Hash password using async/await
     const salt = await bcrypt.genSalt(10);
@@ -22,13 +23,15 @@ export const registerUser = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      phoneNumber
     });
     
     const token = generateToken(user);
     res.cookie('token', token);
-    res.send("User registered successfully");  
+    res.redirect("/shop");  
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    req.flash("error", error.message);
+    res.redirect("/");
   }
 };
 export const loginUser = async (req, res) => {
@@ -36,16 +39,25 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     let user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      req.flash("error", "Invalid email or password");
+      return res.redirect("/");
     }   
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Invalid email or password" });
+      req.flash("error", "Invalid email or password");
+      return res.redirect("/");
     }
     const token = generateToken(user);
     res.cookie('token', token);
-    res.send("User logged in successfully");  
+    res.redirect("/shop");  
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    req.flash("error", error.message);
+    res.redirect("/");
   }
 };
+
+
+export const logoutUser = (req, res) => {
+    res.clearCookie('token');
+    res.redirect('/');
+}

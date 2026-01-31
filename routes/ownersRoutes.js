@@ -16,8 +16,8 @@ router.post('/create', async function (req, res) {
     });
   res.status(201).json(createdOwner);
 })
-router.get('/', (req, res) => {
-  res.send('welcome to my owner router world darling');
+router.get('/admin', (req, res) => {
+  res.render('createproducts');
 });
 
 export default router;

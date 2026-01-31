@@ -1,10 +1,12 @@
 import dotenv from "dotenv";
 dotenv.config();
-
+import expressSession from "express-session";
+import flash from "connect-flash";
 import express from "express";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
+import indexRouter from "./routes/index.js";
 import ownersRouter from "./routes/ownersRoutes.js";
 import usersRouter from "./routes/usersRouter.js";
 import productsRouter from "./routes/productsRouter.js";
@@ -23,8 +25,17 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(expressSession({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(flash());
+
 app.set("view engine", "ejs");
 
+// Mount routers
+app.use("/", indexRouter);
 app.use("/owners", ownersRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);

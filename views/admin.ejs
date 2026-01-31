@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        .navbar {
+            background: #333;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-card h3 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .stat-card p { opacity: 0.9; }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 1rem;
+        }
+        .btn:hover { background: #764ba2; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h2>Admin Dashboard</h2>
+        <a href="/" style="color: white; text-decoration: none;">Logout</a>
+    </div>
+    <div class="container">
+        <h1>Welcome, Admin</h1>
+        <div class="stats">
+            <div class="stat-card">
+                <h3>150</h3>
+                <p>Total Products</p>
+            </div>
+            <div class="stat-card">
+                <h3>320</h3>
+                <p>Total Users</p>
+            </div>
+            <div class="stat-card">
+                <h3>45</h3>
+                <p>Orders Today</p>
+            </div>
+        </div>
+        <a href="/products/create" class="btn">Create Product</a>
+        <a href="/owners" class="btn">Manage Owners</a>
+        <a href="/users" class="btn">View Users</a>
+    </div>
+</body>
+</html>
